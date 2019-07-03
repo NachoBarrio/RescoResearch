@@ -2,70 +2,63 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8" />
-	<title>Empty Offline HTML page</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="initial-scale=1, user-scalable=no" />
-	<script src="../../Resco/JSBridge.js"></script>
-	<script type="text/javascript" src="../../Resco/jquery-3.4.1-min.js" ></script>
+    <meta charset="utf-8" />
+    <title>Empty Offline HTML page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1, user-scalable=no" />
+    <script src="../../Resco/JSBridge.js"></script>
+    <script type="text/javascript" src="../../Resco/jquery-3.4.1-min.js"></script>
 </head>
 <body>
-	
-  Name:<br>
-  <input type='text' id='name'><br>
-  Age:<br>
-  <input type='text' id='age'>
-  IMG:<br>
-  <input type="file" id="fileLoader" name="files" />
-  <button id='btnLaunchInternal' onclick='sendForm()'>Launch Internal</button>
+
+    Name:<br>
+    <input type='text' id='name'><br>
+    Age:<br>
+    <input type='text' id='age'>
+    IMG:<br>
+    <input type="file" id="fileLoader" name="files" />
+    <button id='btnLaunchInternal' onclick='sendForm()'>Launch Internal</button>
 
 
-	<script>
-		function sendForm() {
-			var name = $("#name").val();
-			var age = $("#age").val();
-			var myJSObject = { "name": name, "age" : age };
-			
-			//validar imagen
-			if(['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].indexOf($("#fileLoader").get(0).files[0].type) == -1) {
-				alert('Error : Only JPEG, PNG & GIF allowed');
-				return;
-			}
-			var $data = new FormData();
-			$data.append('title', 'Sample Photo Title');
-			$data.append('file', $("#fileLoader").get(0).files[0]);
-			
-			
-			
-			var imgData = JSON.stringify(getBase64Image(imgElem));
-			$.ajax
-			({
-				type: "POST",
-				//the url where you want to sent the userName and password to
-				url: 'https://prod-89.westeurope.logic.azure.com:443/workflows/b3987a1d3f2d46f58971ab380b367e82/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hSsLe4U8hKTrf47-GXeQ5XGWWc2Fd7g9q-STxz2YWMU',
-				dataType: 'json',
-				async: false,
-				contentType: 'application/json'
-				//json object to sent to the authentication url
-				data: JSON.stringify(myJSObject),
-				success: function () {
+    <script>
+        function sendForm() {
+            var name = $("#name").val();
+            var age = $("#age").val();
+            var myJSObject = { "name": name, "age": age };
 
-				alert("Thanks!"); 
-				}
-			})
-		}
-		
-		function getBase64Image(imgElem) {
-		// imgElem must be on the same server otherwise a cross-origin error will be thrown "SECURITY_ERR: DOM Exception 18"
-			var canvas = document.createElement("canvas");
-			canvas.width = imgElem.clientWidth;
-			canvas.height = imgElem.clientHeight;
-			var ctx = canvas.getContext("2d");
-			ctx.drawImage(imgElem, 0, 0);
-			var dataURL = canvas.toDataURL("image/png");
-			return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-		}
+            //validar imagen
+            var fileSelect = $("#fileLoader");
 
-	</script>
+
+
+            $.ajax
+                ({
+                    type: "POST",
+                    //the url where you want to sent the userName and password to
+                    url: 'https://prod-89.westeurope.logic.azure.com:443/workflows/b3987a1d3f2d46f58971ab380b367e82/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hSsLe4U8hKTrf47-GXeQ5XGWWc2Fd7g9q-STxz2YWMU',
+                    dataType: 'json',
+                    async: false,
+                    contentType: 'application/json',
+                    //json object to sent to the authentication url
+                    data: JSON.stringify(myJSObject),
+                    success: function () {
+
+                        alert("Thanks!");
+                    }
+                })
+        }
+
+        function getBase64Image(imgElem) {
+            // imgElem must be on the same server otherwise a cross-origin error will be thrown "SECURITY_ERR: DOM Exception 18"
+            var canvas = document.createElement("canvas");
+            canvas.width = imgElem.clientWidth;
+            canvas.height = imgElem.clientHeight;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(imgElem, 0, 0);
+            var dataURL = canvas.toDataURL("image/png");
+            return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        }
+
+    </script>
 </body>
 </html>
