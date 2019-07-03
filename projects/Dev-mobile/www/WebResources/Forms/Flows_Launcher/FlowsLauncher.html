@@ -16,11 +16,28 @@
     Age:<br>
     <input type='text' id='age'>
     IMG:<br>
+    <br />
+    <button id='btnLaunchInternal' onclick='getPhoto()'>Launch Internal</button>
+    <br />
+    <br />
     <input type="file" id="fileLoader" name="files" />
     <button id='btnLaunchInternal' onclick='sendForm()'>Launch Internal</button>
 
 
     <script>
+        function getPhoto() {
+            var service = new MobileCRM.Services.DocumentService();
+            service.selectPhoto(
+                function (fileInfo) {
+                    /// <param name='fileInfo' type='MobileCRM.Services.FileInfo '/>
+                    MobileCRM.bridge.alert("File pasted: " + fileInfo.filePath + '\n' + fileInfo.url);
+                    document.getElementById("imgElement").src = fileInfo.url;
+                },
+            );
+        }
+
+
+
         function sendForm() {
             var name = $("#name").val();
             var age = $("#age").val();
@@ -28,16 +45,62 @@
 
             //validar imagen
             var fileSelect = $("#fileLoader");
+            var canvasIMG = document.getElementById('fileLoader').files[0];
+            getCanvas(canvasIMG);
+
+        }
+
+        function getCanvas(img) {
+            //var canvas = document.createElement('canvas');
 
 
+            var imagen = new Image();
 
+
+            if (img.type.match('image.*')) {
+                var reader = new FileReader();
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(img);
+                reader.onload = function (evt) {
+                    if (evt.target.readyState == FileReader.DONE) {
+                        var canvas = document.createElement("canvas");
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        var ctx = canvas.getContext("2d");
+                        imagen.src = evt.target.result;
+
+                        var name = $("#name").val();
+                        var age = $("#age").val();
+                        var myJSObject = {
+                            "name": name,
+                            "age": age,
+                            "image": {
+                                "filename": "imagen1",
+                                "filebody": imagen.src
+                            }
+                        };
+
+                        var jsonFake = { "name": "a", "age": "ab" };
+                        callFlow(jsonFake);
+
+                    }
+                }
+
+            } else {
+                alert("not an image");
+            }
+
+
+        }
+
+        function callFlow(myJSObject) {
             $.ajax
                 ({
                     type: "POST",
                     //the url where you want to sent the userName and password to
                     url: 'https://prod-89.westeurope.logic.azure.com:443/workflows/b3987a1d3f2d46f58971ab380b367e82/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hSsLe4U8hKTrf47-GXeQ5XGWWc2Fd7g9q-STxz2YWMU',
                     dataType: 'json',
-                    async: false,
+                    async: true,
                     contentType: 'application/json',
                     //json object to sent to the authentication url
                     data: JSON.stringify(myJSObject),
@@ -46,17 +109,6 @@
                         alert("Thanks!");
                     }
                 })
-        }
-
-        function getBase64Image(imgElem) {
-            // imgElem must be on the same server otherwise a cross-origin error will be thrown "SECURITY_ERR: DOM Exception 18"
-            var canvas = document.createElement("canvas");
-            canvas.width = imgElem.clientWidth;
-            canvas.height = imgElem.clientHeight;
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(imgElem, 0, 0);
-            var dataURL = canvas.toDataURL("image/png");
-            return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
         }
 
     </script>
