@@ -1,0 +1,36 @@
+﻿<!DOCTYPE HTML>
+<html>
+  <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+	<script type="text/javascript" src="../../Resco/JSBridge.js" ></script>
+    <script type="text/javascript" src="../../Resco/jquery-3.4.1-min.js" ></script>
+
+    </head>
+  <body>
+      <div id="boton">
+          <button id='btnLaunchExternal' onclick='launchExternal()'>Launch External</button>
+          <button id='btnLaunchInternal' onclick='launchInternal()'>Launch Internal</button>
+      </div>
+      <iframe src="https://web.powerapps.com/webplayer/app?appid=/providers/Microsoft.PowerApps/apps/7e821085-d958-4976-bfaa-7fdf081982e0" width="100%" height="100%">
+          alternative content for browsers which do not support iframe.
+      </iframe>
+      <div class="result" style="width:300px;">
+      </div>
+      <script>
+      function launchInternal() {
+          //MobileCRM.bridge.alert("Loading");
+          //MobileCRM.Platform.openUrl("https://web.powerapps.com/webplayer/iframeapp?source=iframe&appId=/providers/Microsoft.PowerApps/apps/7e821085-d958-4976-bfaa-7fdf081982e0");
+          $('#result').load("https://web.powerapps.com/webplayer/app?appid=/providers/Microsoft.PowerApps/apps/7e821085-d958-4976-bfaa-7fdf081982e0");
+
+      }
+      
+      function launchExternal() {
+          MobileCRM.Platform.openUrl("https://web.powerapps.com/webplayer/iframeapp?source=iframe&appId=/providers/Microsoft.PowerApps/apps/7e821085-d958-4976-bfaa-7fdf081982e0");
+      }
+      </script>
+  </body>
+    
+	</html>
