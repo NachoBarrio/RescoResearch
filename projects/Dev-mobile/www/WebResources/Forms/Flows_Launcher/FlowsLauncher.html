@@ -35,13 +35,20 @@
 
                                var name = $("#name").val();
                                 var age = $("#age").val();
-                                var myJSObject = { "name": name, "age": age };
+                                 var myJSObject = {
+                                    "name": name,
+                                    "age": age,
+                                    "image": {
+                                        "filename": "imagen1",
+                                        "filebody": data
+                                    }
+                                };
                                 
                                 $.ajax
                                 ({
                                     type: "POST",
                                     //the url where you want to sent the userName and password to
-                                    url: 'https://prod-89.westeurope.logic.azure.com:443/workflows/b3987a1d3f2d46f58971ab380b367e82/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hSsLe4U8hKTrf47-GXeQ5XGWWc2Fd7g9q-STxz2YWMU',
+                                        url: 'https://prod-72.westeurope.logic.azure.com:443/workflows/8f060b7c145f4307b1886e71ae1ad361/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=yuJ9oJLQallqh6befo26s-iaNa-eh9HuCpJ_FcWWbjA',
                                     dataType: 'json',
                                     async: true,
                                     contentType: 'application/json',
