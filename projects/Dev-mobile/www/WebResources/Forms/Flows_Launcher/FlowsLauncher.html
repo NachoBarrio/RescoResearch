@@ -54,9 +54,9 @@
                                     contentType: 'application/json',
                                     //json object to sent to the authentication url
                                     data: JSON.stringify(myJSObject),
-                                    success: function () {
-
-                                        alert("Thanks!");
+                                    success: function (result) {
+                                        alert(result);
+                                        MobileCRM.bridge.alert("Se ha detectado 1 objeto reconocido en la foto");
                                     }
                                 });
 
@@ -133,9 +133,9 @@
                     contentType: 'application/json',
                     //json object to sent to the authentication url
                     data: JSON.stringify(myJSObject),
-                    success: function () {
-
-                        alert("Thanks!");
+                    success: function (response) {
+                        console.log(response);
+                        console.log("Thanks!");
                     }
                 })
         }
