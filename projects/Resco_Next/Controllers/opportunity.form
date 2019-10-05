@@ -2,7 +2,7 @@
   <IsContactForm>false</IsContactForm>
   <EntityName>opportunity</EntityName>
   <CamelCase>Opportunity</CamelCase>
-  <PrimaryCommands>custom_requestOffer|Disccount||WonOpportunity|||LostOpportunity|QuoteCloseEntity.CloseOpportunity|</PrimaryCommands>
+  <PrimaryCommands>custom_requestOffer|Disccount|</PrimaryCommands>
   <EnabledWorkflows>OnLoadEnabled OnChangeEnabled OnSaveEnabled OnExecuteCommand OnCanExecuteCommand</EnabledWorkflows>
   <SerializedChildrenV2>
     <FormTab xsi:type="DetailTab">
@@ -24,11 +24,13 @@
           <IsConstant>true</IsConstant>
         </DetailItem>
         <DetailItem SchemaName="opportunityratingcode"/>
+        <DetailItem SchemaName="discountpercentage"/>
       </SerializedChildren>
     </FormTab>
     <FormTab xsi:type="IFrameTab">
       <Name>Launch Flow Disccount</Name>
       <Url>file://Forms/Opportunity/DisccountFlow.html</Url>
+      <IsVisible>false</IsVisible>
     </FormTab>
     <FormTab xsi:type="AssociatedTab">
       <Name>Líneas de oportunidad List</Name>

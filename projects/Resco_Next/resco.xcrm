@@ -31,14 +31,14 @@
             <field schema="transactioncurrencyid"/>
           </fields>
         </index>
-        <index schema="idx_account_ownerid" issystem="true">
-          <fields>
-            <field schema="ownerid"/>
-          </fields>
-        </index>
         <index schema="idx_account_defaultpricelevelid" issystem="true">
           <fields>
             <field schema="defaultpricelevelid"/>
+          </fields>
+        </index>
+        <index schema="idx_account_ownerid" issystem="true">
+          <fields>
+            <field schema="ownerid"/>
           </fields>
         </index>
         <index schema="idx_account_name" issystem="true">
@@ -203,14 +203,14 @@
         <property schema="telephone1"/>
       </properties>
       <indexes>
-        <index schema="idx_contact_ownerid" issystem="true">
-          <fields>
-            <field schema="ownerid"/>
-          </fields>
-        </index>
         <index schema="idx_contact_parentcustomerid" issystem="true">
           <fields>
             <field schema="parentcustomerid"/>
+          </fields>
+        </index>
+        <index schema="idx_contact_ownerid" issystem="true">
+          <fields>
+            <field schema="ownerid"/>
           </fields>
         </index>
         <index schema="idx_contact_fullname" issystem="true">
@@ -513,6 +513,7 @@
         <property schema="actualvalue"/>
         <property schema="createdon"/>
         <property schema="customerid"/>
+        <property schema="discountpercentage"/>
         <property schema="estimatedvalue"/>
         <property schema="isrevenuesystemcalculated"/>
         <property schema="modifiedon"/>
@@ -527,19 +528,19 @@
         <property schema="transactioncurrencyid"/>
       </properties>
       <indexes>
+        <index schema="idx_opportunity_transactioncurrencyid" issystem="true">
+          <fields>
+            <field schema="transactioncurrencyid"/>
+          </fields>
+        </index>
         <index schema="idx_opportunity_pricelevelid" issystem="true">
           <fields>
             <field schema="pricelevelid"/>
           </fields>
         </index>
-        <index schema="idx_opportunity_customerid" issystem="true">
+        <index schema="idx_opportunity_originatingleadid" issystem="true">
           <fields>
-            <field schema="customerid"/>
-          </fields>
-        </index>
-        <index schema="idx_opportunity_transactioncurrencyid" issystem="true">
-          <fields>
-            <field schema="transactioncurrencyid"/>
+            <field schema="originatingleadid"/>
           </fields>
         </index>
         <index schema="idx_opportunity_ownerid" issystem="true">
@@ -547,9 +548,9 @@
             <field schema="ownerid"/>
           </fields>
         </index>
-        <index schema="idx_opportunity_originatingleadid" issystem="true">
+        <index schema="idx_opportunity_customerid" issystem="true">
           <fields>
-            <field schema="originatingleadid"/>
+            <field schema="customerid"/>
           </fields>
         </index>
         <index schema="idx_opportunity_name" issystem="true">
