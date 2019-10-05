@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Empty Offline HTML page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1, user-scalable=no" />
+    <script src="../../Libraries/JSBridge.js"></script>
+    <script type="text/javascript" src="../../Libraries/jquery-3.4.1-min.js"></script>
+    <script type="text/javascript">
+        var wait = null;
+        function onLoad() {
+
+            var functionName = "FnLoad";
+
+            try {
+
+                MobileCRM.UI.EntityForm.onCommand("custom_requestOffer",
+
+                    function (entityForm) {
+
+                        if (entityForm) {
+                            MobileCRM.bridge.alert("Submitting special offer to the Central");
+                            var myJSObject = {
+                                "opportunity": entityForm.entity.id
+                            };
+                            callFlow(myJSObject);
+                        }
+                    }
+
+                );
+
+            }
+
+            catch (e) {
+
+                throw new MobileCrmException(functionName + e.message);
+
+            }
+
+        }
+
+        function callFlow(myJSObject) {
+            $.ajax
+                ({
+                    type: "POST",
+                    //the url where you want to sent the userName and password to
+                    url: 'https://prod-30.westeurope.logic.azure.com:443/workflows/584561e9c6534effa5a574851a9e5a39/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=J9SUg3jqD5O0naRp6-jr3AcknkxSy0AdLC5cRctDvxw',
+                    dataType: 'json',
+                    async: true,
+                    contentType: 'application/json',
+                    //json object to sent to the authentication url
+                    data: JSON.stringify(myJSObject),
+                    success: function (response) {
+                        console.log(response);
+                        MobileCRM.bridge.alert(response.result);
+                        console.log("Thanks!");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        console.log("Oooops!");
+                    }
+                })
+        }
+
+
+
+    </script>
+</head>
+<body onload="onLoad()">
+
+</body>
+</html>
