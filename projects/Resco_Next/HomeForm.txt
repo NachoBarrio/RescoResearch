@@ -1,1 +1,1 @@
-﻿@Dashboard,@activity,contact,lead,opportunity,quote,product,@Setup,@About,#Power Platform,@@PowerApps;file://Forms/PowerApp/Embebida.html,@@Power BI;file://Forms/PowerBI/PowerBI.html,##
+﻿@Dashboard,@activity,contact,lead,opportunity,quote,product,@Setup,@About,#Power Platform,@@PowerApps;file://Forms/PowerApp/Embebida.html,@@Power BI;file://Forms/PowerBI/PowerBI.html,@@PowerApp inside Resco;file://Forms/PowerApp/PwAppdentro.html,##
