@@ -1,1 +1,1 @@
-﻿@Dashboard,@activity,contact,lead,opportunity,quote,product,@Setup,@About,#Power Platform,@@PowerBi;http://www.example.com,##
+﻿@Dashboard,@activity,contact,lead,opportunity,quote,product,@Setup,@About,#Power Platform,@@PowerApps;file://Forms/PowerApp/Embebida.html,@@Power BI;file://Forms/PowerBI/PowerBI.html,##
